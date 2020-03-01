@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: webapi
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    volumes:
+      - .db_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer:4.7.6-standalone
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+volumes:
+  db_data: {}
